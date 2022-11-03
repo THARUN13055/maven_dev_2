@@ -3,11 +3,16 @@ pipeline{
     tools {
         maven "maven3.8.6"
     }
-    
+
     stages{
         stage('git checkout'){
             steps{
                 git branch: 'main', url: 'https://github.com/THARUN13055/maven_dev_2.git'
+            }
+        }
+        stage('unit testing'){
+            steps{
+                sh 'mvn test'
             }
         }
     }
