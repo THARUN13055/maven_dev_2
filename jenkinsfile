@@ -45,7 +45,7 @@ pipeline{
                     //this is repo for version saving
                     def pom = readMavenPom file: 'pom.xml'
                     //this is the repo for snapshot saving
-                    def snap = readMavenPom.version.endsWith("SNAPSHOT") ? "demoapp-snapshot" : "demoapp-release"
+                    def snap = pom.version.endsWith("SNAPSHOT") ? "demoapp-snapshot" : "demoapp-release"
                     nexusArtifactUploader artifacts: 
                     [
                         [
