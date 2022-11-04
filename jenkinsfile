@@ -70,7 +70,7 @@ pipeline{
         stage('docker build'){
             steps{
                 script{
-                    sh "docker build -t tharun13055/$BUILD_NAME:$BUILD_ID ."
+                    sh "docker build -t tharun13055/$JOB_NAME:v1.$BUILD_ID ."
                 }
             }
         }
