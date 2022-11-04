@@ -28,6 +28,7 @@ pipeline{
         stage('static code analysis'){
             steps{
                 script{
+                    //her we are using sonarqube secret file to clean the previous jar files
                     withSonarQubeEnv(credentialsId: 'sonar-api') {
                     sh 'mvn clean package sonar:sonar'
                     }
@@ -36,6 +37,7 @@ pipeline{
         }
         stage('quality gate status'){
             steps{
+                //it will check the quality of the code using sonarqube
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
             }
         }
@@ -60,7 +62,7 @@ pipeline{
                     nexusUrl: '20.228.163.69:8081',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    repository: "${snap.version}",
+                    repository: snap,
                     version: "${pom.version}"
                 }
             }
