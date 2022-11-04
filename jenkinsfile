@@ -26,6 +26,8 @@ pipeline{
             }
         }
         stage('static code analysis'){
+            //configure system -> sonarqube server
+            //secret text
             steps{
                 script{
                     //her we are using sonarqube secret file to clean the previous jar files
