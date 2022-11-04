@@ -69,6 +69,7 @@ pipeline{
         }
         stage('docker remove image'){
             steps{
+                //if is exes steps for removing the previous image
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                     sh "docker rmi tharun13055/$JOB_NAME:v1.$currentBuild.previousBuild.number"
                 }
@@ -77,8 +78,11 @@ pipeline{
         stage('docker build'){
             steps{
                 script{
-
+                    //this is extra image which we are build for identification
                     sh "docker build -t tharun13055/$JOB_NAME:v1.$BUILD_ID ."
+                    //this image is use to push in k8
+                    sh "docker build -t tharun13055/$JOB_NAME:v1.latest"
+                    //this cmd is use to remove the <none> image
                     sh "docker image prune -f"
                 }
             }
@@ -88,7 +92,7 @@ pipeline{
                 script{
                     withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerhub')]) {
                         sh "docker login -u tharun13055 -p ${dockerhub-pwd}"
-                        sh "docker push tharun13055/$JOB_NAME:v1.$BUILD_ID"
+                        sh "docker push tharun13055/$JOB_NAME:v1.latest"
                     }
                 }
             }
