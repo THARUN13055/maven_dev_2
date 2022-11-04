@@ -67,7 +67,7 @@ pipeline{
                 }
             }
         }
-        stage{
+        stage('docker remove image'){
             steps{
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                     sh "docker rmi tharun13055/$JOB_NAME:v1.$currentBuild.previousBuild.number"
@@ -77,7 +77,7 @@ pipeline{
         stage('docker build'){
             steps{
                 script{
-                    
+
                     sh "docker build -t tharun13055/$JOB_NAME:v1.$BUILD_ID ."
                 }
             }
