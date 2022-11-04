@@ -1,13 +1,10 @@
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: my-springboot-autoscale
   namespace: devopsproject
-  labels:
-    app: myspringbootapp
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1
     kind: Deployment
     name: my-springboot
   minReplicas: 1
@@ -19,3 +16,14 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+status:
+  observedGeneration: 1
+  currentReplicas: 1
+  desiredReplicas: 1
+  currentMetrics:
+  - type: Resource
+    resource:
+      name: cpu
+      current:
+        averageUtilization: 0
+        averageValue: 0

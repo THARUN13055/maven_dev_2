@@ -4,6 +4,7 @@ metadata:
   name: my-springboot
   namespace: devopsproject
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: myspringbootapp
@@ -14,11 +15,14 @@ spec:
     spec:
       containers:
       - name: mycontainer
-        image: tharun13055/maven_dev:latest
+        image: tharun13055/maven_dev:v1.latest
         imagePullPolicy: Always
         resources:
-          limits:
+          requests:
             memory: "256Mi"
             cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
         ports:
         - containerPort: 9000
