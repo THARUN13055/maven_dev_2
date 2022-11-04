@@ -100,13 +100,13 @@ pipeline{
         stage('kubectl deployment'){
             steps{
                 sshagent(['k8']) {
-                    sh "scp -o StrictHostKeyChecking=no namespace.yaml deployment.yaml service.yaml scaling.yaml tharun@20.228.163.69:/home/ubuntu/"
+                    sh "scp -o StrictHostKeyChecking=no namespace.yaml deployment.yaml service.yaml scaling.yaml ubuntu@3.80.25.208:/home/ubuntu/"
                     script{
                         try{
-                            sh "ssh tharun@20.228.163.69 kubectl apply -f ."
+                            sh "ssh ubuntu@3.80.25.208 kubectl apply -f ."
                         }
                         catch(error){
-                            sh "ssh tharun@20.228.163.69 kubectl create -f ."
+                            sh "ssh ubuntu@3.80.25.208 kubectl create -f ."
                         }
                     }
                 }
