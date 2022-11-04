@@ -85,7 +85,8 @@ pipeline{
         stage('docker push'){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'sonar-api', variable: 'docker-pwd')]) {
+                    withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerhub')]) {
+                        sh "docker login -u tharun13055 -p ${dockerhub-pwd}"
                         sh "docker push tharun13055/$JOB_NAME:v1.$BUILD_ID"
                     }
                 }
