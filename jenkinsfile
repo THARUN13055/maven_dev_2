@@ -81,7 +81,7 @@ pipeline{
                     //this is extra image which we are build for identification
                     sh "docker build -t tharun13055/$JOB_NAME:v1.$BUILD_ID ."
                     //this image is use to push in k8
-                    sh "docker build -t tharun13055/$JOB_NAME:v1.latest"
+                    sh "docker build -t tharun13055/$JOB_NAME:v1.latest ."
                     //this cmd is use to remove the <none> image
                     sh "docker image prune -f"
                 }
