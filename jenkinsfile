@@ -108,6 +108,7 @@ pipeline{
                         catch(error){
                             sh "ssh tharun@20.228.163.69 kubectl create -f ."
                         }
+                    }
                 }
             }
         }
