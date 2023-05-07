@@ -59,6 +59,14 @@ python3 pacman.py install <listed>
 
 ```
 
+## Kubernetes Raw Execution
+
+```bash
+kubectl apply -f .
+```
+
+- It will Execute all The Kubernetes File
+
 
 
 
